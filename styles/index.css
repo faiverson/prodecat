@@ -1,0 +1,194 @@
+:root {
+  --brand-blue: #07162a;
+  --brand-marine: #15325b;
+  --brand-blue-grey: #3e526d;
+  --brand-orange: #f5931c;
+  --brand-gray: #727b86;
+  --brand-gray-dark: #2c394a;
+  --brand-gray-light: #a8aeb5;
+  --brand-spotlight-blue: #1c86f4;
+  --xl: 1280px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* we can narrow down using only fonts been used in the project */
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import './base.css';
+@import './fonts.css';
+@import './form.css';
+
+.main-background {
+  background-image: url('/images/bg-center.svg'), url('/images/background-bottom-right.svg');
+  background-position: calc((100vw - var(--xl)) / 2) calc(101px + 3em), bottom right;
+  background-repeat: no-repeat;
+}
+
+header {
+  box-sizing: content-box;
+}
+
+.main {
+  min-height: calc(100vh - calc(102px + 1rem)); /* img includes border and padding */
+}
+
+.row{
+  @apply flex items-center mb-4;
+}
+
+/*********************************************************************************************
+                                    LINKS
+**********************************************************************************************/
+.square-effect {
+  @apply relative overflow-hidden no-underline;
+}
+
+a.square-effect-orange {
+  @apply square-effect text-brand-orange ;
+}
+
+a.square-effect-white {
+  @apply square-effect text-white;
+}
+
+a.square-effect-white::after,
+a.square-effect-orange::after {
+  content: "";
+  @apply absolute opacity-25;
+  left: 12px;
+  bottom: -6px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  transition: 0.35s cubic-bezier(0.25, 0.1, 0, 2.05);
+}
+
+a.square-effect-orange:hover:after,
+a.square-effect-white:hover:after {
+  left: 0;
+  bottom: -2px;
+  @apply w-full h-full;
+}
+
+.square-effect-white::after{
+  @apply bg-white;
+}
+
+.square-effect-orange::after{
+  @apply bg-brand-orange;
+}
+
+
+/*********************************************************************************************
+                                    Loaders
+**********************************************************************************************/
+.wrapper-loader{
+  @apply flex justify-center items-center w-screen h-screen fixed bg-black bg-opacity-25;
+}
+
+.loader{
+  animation: rotate 2s linear infinite normal;
+  @apply w-4 h-4 relative;
+}
+.loader_ball {
+  animation: move1 1s ease-in-out infinite alternate;
+  border-radius: 50%;
+  @apply w-full h-full absolute bg-brand-orange;
+}
+
+.loader_ball:nth-of-type(2) {
+  animation-name: move2;
+}
+
+.loader_ball:nth-of-type(3) {
+  animation-name: move3;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes move1 {
+  0%, 5% {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -100%);
+  }
+}
+
+@keyframes move2 {
+  0%, 5% {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(100%, 100%);
+  }
+}
+@keyframes move3 {
+  0%, 15% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  to {
+    -webkit-transform: translate(-100%, 100%);
+            transform: translate(-100%, 100%);
+  }
+}
+
+.navbar-selected {
+  @apply border-t-4 border-brand-orange;
+}
+/*********************************************************************************************
+                                    BADGES
+**********************************************************************************************/
+.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/*********************************************************************************************
+                                    LOGIN PAGE
+**********************************************************************************************/
+.special.main-background {
+  background-image:
+    url('/images/background-top-left.svg'),
+    url('/images/background-bottom-right.svg');
+  background-position:
+    top left,
+    bottom right;
+  background-repeat:
+    no-repeat;
+}
+
+div.login-background{
+  @apply absolute opacity-25 w-screen h-screen z-0;
+  background-image:
+    url('/images/bg-ball.png'),
+    url('/images/bg-cat.png');
+  background-position:
+    top right,
+    bottom left;
+  background-repeat: no-repeat;
+  background-size:
+    330px, 560px;
+}
+/*********************************************************************************************
+                                    HEADER
+**********************************************************************************************/
+.grid-min-content{
+  grid-template-columns: repeat(auto-fit, minmax(max-content, 0));
+}

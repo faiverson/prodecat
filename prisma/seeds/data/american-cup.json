@@ -1,0 +1,248 @@
+{
+  "tournament": {
+    "name": "Copa América",
+    "alias": "american-cup",
+    "type": "cup",
+    "year": "2021",
+    "rounds": {
+      "groups": 2,
+      "teams": 6,
+      "qualified": 4,
+      "type": "one_leg"
+    },
+    "playoffs": {
+      "type": "one_leg",
+      "round_of": 8
+    }
+  },
+  "groups": [
+    {
+      "name": "A",
+      "teams": [
+        {
+          "name": "Argentina"
+        },
+        {
+          "name": "Chile"
+        },
+        {
+          "name": "Australia"
+        },
+        {
+          "name": "Bolivia"
+        },
+        {
+          "name": "Paraguay"
+        },
+        {
+          "name": "Uruguay"
+        }
+      ]
+    },
+    {
+      "name": "B",
+      "teams": [
+        {
+          "name": "Perú"
+        },
+        {
+          "name": "Venezuela"
+        },
+        {
+          "name": "Colombia"
+        },
+        {
+          "name": "Ecuador"
+        },
+        {
+          "name": "Brasil"
+        },
+        {
+          "name": "Catar"
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "round": "1",
+      "local": "Argentina",
+      "away": "Chile",
+      "started_at": "2021-06-11 20:00:00"
+    },
+    {
+      "round": "1",
+      "local": "Australia",
+      "away": "Uruguay",
+      "started_at": "2021-06-12 16:00:00"
+    },
+    {
+      "round": "1",
+      "local": "Paraguay",
+      "away": "Bolivia",
+      "started_at": "2021-06-12 19:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Chile",
+      "away": "Bolivia",
+      "started_at": "2021-06-15 16:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Argentina",
+      "away": "Uruguay",
+      "started_at": "2021-06-15 19:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Paraguay",
+      "away": "Australia",
+      "started_at": "2021-06-16 19:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Uruguay",
+      "away": "Chile",
+      "started_at": "2021-06-18 20:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Australia",
+      "away": "Bolivia",
+      "started_at": "2021-06-19 17:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Argentina",
+      "away": "Paraguay",
+      "started_at": "2021-06-19 20:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Bolivia",
+      "away": "Uruguay",
+      "started_at": "2021-06-22 17:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Australia",
+      "away": "Argentina",
+      "started_at": "2021-06-22 20:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Chile",
+      "away": "Paraguay",
+      "started_at": "2021-06-23 19:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Bolivia",
+      "away": "Argentina",
+      "started_at": "2021-06-27 20:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Chile",
+      "away": "Australia",
+      "started_at": "2021-06-27 20:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Uruguay",
+      "away": "Paraguay",
+      "started_at": "2021-06-27 20:00:00"
+    },
+    {
+      "round": "1",
+      "local": "Colombia",
+      "away": "Ecuador",
+      "started_at": "2021-06-12 20:00:00"
+    },
+    {
+      "round": "1",
+      "local": "Brasil",
+      "away": "Venezuela",
+      "started_at": "2021-06-13 17:00:00"
+    },
+    {
+      "round": "1",
+      "local": "Perú",
+      "away": "Catar",
+      "started_at": "2021-06-13 20:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Colombia",
+      "away": "Venezuela",
+      "started_at": "2021-06-16 20:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Ecuador",
+      "away": "Catar",
+      "started_at": "2021-06-17 17:00:00"
+    },
+    {
+      "round": "2",
+      "local": "Perú",
+      "away": "Brasil",
+      "started_at": "2021-06-17 20:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Venezuela",
+      "away": "Ecuador",
+      "started_at": "2021-06-20 17:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Ecuador",
+      "away": "Perú",
+      "started_at": "2021-06-23 20:00:00"
+    },
+    {
+      "round": "3",
+      "local": "Brasil",
+      "away": "Catar",
+      "started_at": "2021-06-21 19:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Ecuador",
+      "away": "Perú",
+      "started_at": "2021-06-23 20:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Catar",
+      "away": "Venezuela",
+      "started_at": "2021-06-24 17:00:00"
+    },
+    {
+      "round": "4",
+      "local": "Brasil",
+      "away": "Colombia",
+      "started_at": "2021-06-24 20:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Catar",
+      "away": "Colombia",
+      "started_at": "2021-06-27 20:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Ecuador",
+      "away": "Brasil",
+      "started_at": "2021-06-27 20:00:00"
+    },
+    {
+      "round": "5",
+      "local": "Venezuela",
+      "away": "Perú",
+      "started_at": "2021-06-27 20:00:00"
+    }
+  ]
+}

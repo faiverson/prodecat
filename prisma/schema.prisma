@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource mysql {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String       @id @default(uuid())
+  username         String       @unique
+  email            String       @unique
+  type             String       @default("user")
+  password         String
+  phone            String?
+  points           Int          @default(0)
+  created_at       DateTime     @default(now())
+  updated_at       DateTime     @default(now())
+  friends          Friend[]     @relation("friend_friend_foreign")
+  friendOf         Friend[]     @relation("friend_user_foreign")
+  invitations_made Invitation[] @relation("invitation_from_foreign")
+  invitations      Invitation[] @relation("invitation_to_foreign")
+  memberGroups     Member[]     @relation("member_user_foreign")
+  myGroups         UserGroup[]  @relation("ug_user_foreign")
+  results          UserResult[] @relation("ur_user_foreign")
+
+  @@map(name: "users")
+}
+
+model Team {
+  id            String                @id @default(uuid())
+  name          String
+  alias         String                @unique
+  away_matches  Match[]               @relation("matches_away_team_foreign")
+  local_matches Match[]               @relation("matches_local_team_foreign")
+  tournaments   TournamentTeamGroup[] @relation("ttg_team_foreign")
+
+  @@map(name: "teams")
+}
+
+model Match {
+  id            String       @id @default(uuid())
+  tournament_id String
+  local_team_id String
+  local_score   Int?
+  away_team_id  String
+  away_score    Int?
+  round         String
+  round_number  String
+  started_at    DateTime
+  state         String?      @default("created")
+  local         Team         @relation("matches_away_team_foreign", fields: [away_team_id], references: [id])
+  away          Team         @relation("matches_local_team_foreign", fields: [local_team_id], references: [id])
+  tournament    Tournament   @relation("matches_tournament_foreign", fields: [tournament_id], references: [id])
+  results       UserResult[] @relation("ur_match_foreign")
+
+  @@index([away_team_id], name: "away_team_id")
+  @@index([local_team_id], name: "local_team_id")
+  @@index([tournament_id], name: "tournament_id")
+  @@map(name: "matches")
+}
+
+model Tournament {
+  id            String                @id @default(uuid())
+  alias         String                @unique
+  name          String
+  type          String
+  year          String?
+  rounds        Json?
+  playoffs      Json?
+  current_round String                @default("1")
+  active        Boolean               @default(true)
+  matches       Match[]               @relation("matches_tournament_foreign")
+  teams         TournamentTeamGroup[] @relation("ttg_tournament_foreign")
+
+  @@map(name: "tournaments")
+}
+
+model Group {
+  id         String                @id @default(uuid())
+  name       String
+  tournament TournamentTeamGroup[] @relation("ttg_group_foreign")
+
+  @@map(name: "groups")
+}
+
+model TournamentTeamGroup {
+  team_id       String
+  tournament_id String
+  group_id      String
+  group         Group      @relation("ttg_group_foreign", fields: [group_id], references: [id])
+  team          Team       @relation("ttg_team_foreign", fields: [team_id], references: [id])
+  tournament    Tournament @relation("ttg_tournament_foreign", fields: [tournament_id], references: [id])
+
+  @@id([tournament_id, team_id, group_id])
+  @@index([group_id], name: "group_id")
+  @@index([team_id], name: "team_id")
+  @@map(name: "tournaments_teams_groups")
+}
+
+model UserResult {
+  match_id    String
+  user_id     String
+  local_score Int?
+  away_score  Int?
+  match       Match  @relation("ur_match_foreign", fields: [match_id], references: [id])
+  user        User   @relation("ur_user_foreign", fields: [user_id], references: [id])
+
+  @@id([match_id, user_id])
+  @@index([user_id], name: "user_id")
+  @@map(name: "user_results")
+}
+
+model Friend {
+  user_id   String
+  friend_id String
+  friend    User   @relation("friend_friend_foreign", fields: [friend_id], references: [id])
+  user      User   @relation("friend_user_foreign", fields: [user_id], references: [id])
+
+  @@id([user_id, friend_id])
+  @@index([friend_id], name: "friend_id")
+  @@map(name: "friends")
+}
+
+model UserGroup {
+  id       String   @id @default(uuid())
+  name     String
+  owner_id String
+  owner    User     @relation("ug_user_foreign", fields: [owner_id], references: [id])
+  members  Member[] @relation("member_ug_foreign")
+
+  @@index([owner_id], name: "owner_id")
+  @@map(name: "user_groups")
+}
+
+model Member {
+  id            String      @id @default(uuid())
+  user_group    UserGroup   @relation("member_ug_foreign", fields: [user_group_id], references: [id])
+  member        User        @relation("member_user_foreign", fields: [member_id], references: [id])
+  user_group_id String
+  member_id     String
+
+  @@index([user_group_id], name: "user_group_id")
+  @@map(name: "members")
+}
+
+model Invitation {
+  from_user_id String
+  to_friend_id String
+  state        String
+  from_user    User   @relation("invitation_from_foreign", fields: [from_user_id], references: [id])
+  to_friend    User   @relation("invitation_to_foreign", fields: [to_friend_id], references: [id])
+
+  @@id([from_user_id, to_friend_id])
+  @@index([to_friend_id], name: "to_friend_id")
+  @@map(name: "invitations")
+}
