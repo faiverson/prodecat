@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  nextjs:
+    container_name: "${COMPOSE_PROJECT_NAME?}-nextjs"
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+      target: ${TARGET_ENV?}
+      args:
+        NODE_ENV: ${NODE_ENV?}
+    restart: always
+
+    environment:
+      APP_ENV: ${APP_ENV?}
+      APP_URL: ${APP_URL?}
+
+    networks:
+      - net-frontend
+
+networks:
+  net-frontend:
+    driver: bridge
