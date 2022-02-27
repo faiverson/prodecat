@@ -1,6 +1,6 @@
 import Prisma from '@prisma/client'
 const { PrismaClient } = Prisma
-import {snakeCase} from '#lib/utils/utility.js'
+import {snakeCase} from '#lib/utils/utility.mjs'
 import Date from 'datejs'
 import {default as data} from './data/american-cup.json'
 

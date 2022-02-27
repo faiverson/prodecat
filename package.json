@@ -22,9 +22,8 @@
     "eslint-config-next": "12.1.0",
     "prisma": "^3.10.0"
   },
-  "type": "module",
   "prisma": {
-    "seed": "node --experimental-json-modules ./prisma/seeds/index.js"
+    "seed": "node --experimental-json-modules ./prisma/seeds/index.mjs"
   },
   "imports": {
     "#lib/*": "./lib/*",

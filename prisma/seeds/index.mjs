@@ -1,8 +1,8 @@
 import Prisma from '@prisma/client'
 const { PrismaClient } = Prisma
-import users from './users.js'
-import teams from './teams.js'
-import matches from './matches.js'
+import users from './users.mjs'
+import teams from './teams.mjs'
+import matches from './matches.mjs'
 
 const prisma = new PrismaClient()
 

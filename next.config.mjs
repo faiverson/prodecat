@@ -1,5 +1,5 @@
-const config = {
-  reactStrictMode: true,
+export default () => {
+    return {
+    reactStrictMode: false,
+      }
 }
-
-export default config

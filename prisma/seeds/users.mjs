@@ -1,7 +1,7 @@
 import { default as bcryptjs} from 'bcryptjs'
 import {faker} from '@faker-js/faker'
-import {repeat} from '#lib/utils/utility.js'
-import {UserType} from '#prisma/seeds/enum/index.js'
+import {repeat} from '#lib/utils/utility.mjs'
+import {UserType} from '#prisma/seeds/enum/index.mjs'
 import {config} from 'dotenv'
 import Prisma from '@prisma/client'
 const { PrismaClient } = Prisma
