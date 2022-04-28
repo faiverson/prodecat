@@ -1,9 +1,11 @@
-const { PrismaClient } = require('@prisma/client')
-const { snakeCase } = require('lodash')
-const prisma = new PrismaClient()
-const data = require('./data/american-cup.json')
+#!/usr/bin/env ts-node
+import {PrismaClient} from '@prisma/client'
+import {snakeCase} from '../../lib/utils/utility'
+import {default as data} from './data/american-cup.json'
 
-async function main() {
+const prisma = new PrismaClient()
+
+export default async function teams() {
   await prisma.tournamentTeamGroup.deleteMany()
   await prisma.match.deleteMany()
   await prisma.tournament.deleteMany()
@@ -30,9 +32,9 @@ function addCup(tournament) {
 
     return addTeams(item_group.teams, group, tournament)
   })
+
   return Promise.all(promises)
 }
-
 
 function addTeams(teams, group, tournament) {
   const promises =  teams.map( async item => {
@@ -58,9 +60,8 @@ function addTeams(teams, group, tournament) {
     })
     return team
   })
-  return Promise.all(promises)
-}
 
-main()
-  .catch(ex => { throw ex })
-  .finally(async () => { await prisma.$disconnect() })
+  return Promise.all(promises).then(response => {
+    console.table(teams)
+  })
+}

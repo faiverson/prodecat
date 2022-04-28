@@ -1,11 +1,10 @@
+#!/usr/bin/env ts-node
+import {PrismaClient} from '@prisma/client'
+import {default as data} from './data/american-cup.json'
 
-const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
-const data = require('./data/american-cup.json')
-const moment = require('moment')
-const { date_format } = require('../../global-config.js')
 
-async function main() {
+export default async function matches() {
   await prisma.match.deleteMany()
   // if the field in where is not unique you need to use findMany
   let tournament = await prisma.tournament.findMany({
@@ -15,7 +14,7 @@ async function main() {
   })
 
   // it return an array and I need only the first match
-  tournament = tournament.shift()
+  const tourney = tournament[0]
 
   const promises =  data.matches.map(async item => {
     const teams = await prisma.team.findMany({
@@ -27,7 +26,7 @@ async function main() {
         },
       },
     })
-    
+
     const local = teams.find( team => team.name === item.local)
     const away = teams.find( team => team.name === item.away)
     if(!local) {
@@ -37,14 +36,16 @@ async function main() {
       throw new Error(`Team ${away} not found`)
     }
 
+    const d = new Date(item.started_at)
+
     return prisma.match.create({
       data: {
         round: `Round ${item.round}`,
         round_number: item.round,
-        started_at: moment(item.started_at, date_format).toDate(),
+        started_at: d.toISOString(),
         tournament: {
           connect: {
-            id: tournament.id
+            id: tourney.id
           }
         },
         local: {
@@ -60,13 +61,8 @@ async function main() {
       }
     })
   })
-  return Promise.all(promises)
-}
 
-main()
-  .catch(ex => {
-    console.error(`Error on matches ${ex}`)
+  return Promise.all(promises).then(response => {
+    console.table(data.matches)
   })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+}
