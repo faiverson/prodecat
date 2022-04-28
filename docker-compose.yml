@@ -4,7 +4,7 @@ services:
     container_name: "${COMPOSE_PROJECT_NAME?}-nextjs"
     build:
       context: .
-      dockerfile: ./docker/node/Dockerfile
+      dockerfile: ./Dockerfile
       target: ${TARGET_ENV?}
       args:
         NODE_ENV: ${NODE_ENV?}

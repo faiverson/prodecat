@@ -7,13 +7,11 @@ ENV PATH=/app/node_modules/.bin:$PATH \
     NODE_ENV="$NODE_ENV"
 RUN apk --no-cache add curl
 COPY package.json yarn.lock /app/
-
 EXPOSE 3000
 
 # Build target dependencies #
 #############################
 FROM base AS dependencies
-
 # Install prod dependencies
 RUN yarn install --production && \
     # Cache prod dependencies

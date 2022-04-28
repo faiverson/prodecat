@@ -4,7 +4,7 @@ services:
     container_name: "${COMPOSE_PROJECT_NAME?}-nextjs"
     build:
       context: .
-      dockerfile: ./docker/node/Dockerfile
+      dockerfile: ./Dockerfile
       target: ${TARGET_ENV?}
       args:
         NODE_ENV: ${NODE_ENV?}
@@ -17,17 +17,16 @@ services:
       - ${APP_PORT}:3000
     depends_on:
       - mariadb
-
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
     networks:
-      net-frontend:
-        aliases:
-          - ${HOSTNAME?}
+      - app-bridge
 
   mariadb:
     container_name: "${COMPOSE_PROJECT_NAME?}-mariadb"
     image: mariadb:latest
     volumes:
-      - ./docker/mariadb:/var/lib/mysql
+      - db-data:/var/lib/mysql
     ports:
       - "${DB_PORT}:3306/tcp"
     restart: on-failure
@@ -36,6 +35,8 @@ services:
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_DATABASE=${DB_NAME}
+    networks:
+      - app-bridge
 
   mailhog:
     container_name: "${COMPOSE_PROJECT_NAME?}-mailhog"
@@ -49,4 +50,10 @@ services:
     volumes:
       - maildir:/tmp
 volumes:
-  maildir: {}
+  maildir:
+  db-data:
+
+networks:
+  app-bridge:
+    driver: bridge
+
