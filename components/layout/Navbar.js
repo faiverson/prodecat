@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 const Navbar = ({items: moreItems}) => {
   const router = useRouter()
@@ -15,9 +15,9 @@ const Navbar = ({items: moreItems}) => {
 
   return (
     <>
-      {items.map(({ href, as, label, className }, idx) => (
+      {items.map(({ href, as, label }, idx) => (
         <div key={`${href}${label}`} className={
-          classNames('flex', 'items-center', 'justify-around',{
+          cn('flex', 'items-center', 'justify-around', {
             "navbar-selected": router.pathname === href || router.asPath === href
           })
         }>

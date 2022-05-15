@@ -13,23 +13,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import './font-awesome/all.css';
+@import './font-awesome/v4-shims.css';
 @import './base.css';
-@import './fonts.css';
 @import './form.css';
 
 .main-background {
-  background-image: url('/images/bg-center.svg'), url('/images/background-bottom-right.svg');
-  background-position: calc((100vw - var(--xl)) / 2) calc(101px + 3em), bottom right;
+  background-image:url('/images/bg-center.svg'), url('/images/background-bottom-right.svg');
+  background-position: top left, calc((100vw - var(--xl)) / 2) calc(101px + 3em), bottom right;
   background-repeat: no-repeat;
 }
 
-header {
-  box-sizing: content-box;
-}
-
 .main {
-  min-height: calc(100vh - calc(102px + 1rem)); /* img includes border and padding */
+  min-height: calc(100vh - calc(109px + 1rem)); /* img includes border and padding */
 }
 
 .row{
@@ -159,32 +155,6 @@ a.square-effect-white:hover:after {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-/*********************************************************************************************
-                                    LOGIN PAGE
-**********************************************************************************************/
-.special.main-background {
-  background-image:
-    url('/images/background-top-left.svg'),
-    url('/images/background-bottom-right.svg');
-  background-position:
-    top left,
-    bottom right;
-  background-repeat:
-    no-repeat;
-}
-
-div.login-background{
-  @apply absolute opacity-25 w-screen h-screen z-0;
-  background-image:
-    url('/images/bg-ball.png'),
-    url('/images/bg-cat.png');
-  background-position:
-    top right,
-    bottom left;
-  background-repeat: no-repeat;
-  background-size:
-    330px, 560px;
-}
 /*********************************************************************************************
                                     HEADER
 **********************************************************************************************/

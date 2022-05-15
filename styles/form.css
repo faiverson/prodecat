@@ -16,6 +16,7 @@
   background-color: rgb(183, 109, 18, .8);
 }
 
+button.btn-primary,
 .btn-primary {
   @apply btn bg-brand-orange text-brand-blue;
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
@@ -27,6 +28,7 @@
   box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)
 }
 
+button.btn-secondary,
 .btn-secondary {
   @apply btn bg-brand-blue text-white border border-solid;
   border-color: rgba(255, 153, 51, 0.5)
@@ -161,14 +163,14 @@ input ~ button:focus {
 
 .checkbox-effect:not(:checked) + label:before,
 .checkbox-effect:checked + label:before {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 6 Free";
   content: "";
   @apply inline-block cursor-pointer font-black border-2 h-4 w-4 border-solid border-brand-orange mr-3 rounded-sm checkbox-transition;
 }
 
 .checkbox-effect:not(:checked) + label:after,
 .checkbox-effect:checked + label:after {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 6 Free";
   content: "\f00c";
   @apply flex font-black text-xl h-full items-center absolute text-brand-orange opacity-0 origin-center checkbox-transition;
   top: 0;

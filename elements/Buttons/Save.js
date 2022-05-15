@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { FaSave, FaCheckCircle } from 'react-icons/fa'
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
+// import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 const SaveButton = ({ text, onClick }) => {
   const states = {
