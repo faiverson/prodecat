@@ -1,0 +1,25 @@
+.special.mainBackground {
+  background-image:
+    url('/images/background-top-left.svg'),
+    url('/images/background-bottom-right.svg');
+  background-position:
+    top left,
+    bottom right;
+  background-repeat:
+    no-repeat;
+}
+
+.loginBackground{
+  @apply absolute opacity-25 w-screen h-screen z-0;
+  background-image:
+    url('/images/background-top-left.svg'),
+    url('/images/bg-ball.png'),
+    url('/images/bg-cat.png');
+  background-position:
+    top left,
+    top right,
+    bottom left;
+  background-repeat: no-repeat;
+  background-size:
+    270px, 330px, 560px;
+}
