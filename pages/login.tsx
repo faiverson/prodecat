@@ -20,14 +20,6 @@ const LogInMutation = gql`
   }
 `
 
-const LogInHeader = () => {
-  return (
-    <header className="w-full mx-2 max-h-28 xl:py-4">
-      <Image src="/images/forecats.png" alt="Forecats" width={419} height={81} />
-    </header>
-  );
-}
-
 const LogIn = () => {
   // const client = useApolloClient()
   // const [logIn] = useMutation(LogInMutation)
@@ -100,7 +92,9 @@ const LogInPage = () => {
     <Layout special className={cn(styles.special, styles.loginPage)}>
       <div className={styles.loginBackground}></div>
       <div className="container relative z-10 h-full max-w-screen-lg mx-auto">
-        <LogInHeader />
+        <header className="w-full mx-2 max-h-28 xl:py-4">
+          <Image src="/images/forecats.png" alt="Forecats" width={419} height={81} />
+        </header>
         <main className="flex main">
           <LogIn />
         </main>

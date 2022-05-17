@@ -1,68 +1,55 @@
 import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import styles from './input.module.css'
 
-export const variations = {
-  'PRIMARY': 'input-primary',
-  'SECONDARY': 'input-secondary',
-  'ERROR': 'input-error',
+export const variation = {
+  PRIMARY: 'input-primary',
+  SECONDARY: 'input-secondary',
 }
 
-const Input = ({name, validation, variation, type, defaultValue, value, label, placeholder, autoComplete, onChange}) => {
+const Input = ({variation, name, type, error, value, label, placeholder, autoComplete, onChange}) => {
   const [text, setText] = useState(placeholder)
   const id = [name, 'fc-input'].join('-')
 
-  const onFocus = () => {
-    if(label && !validation?.error) {
-      setText(label)
-    }
-  }
 
-  const onBlur = () => {
-    if(value === '' && !validation?.error) {
-      setText(placeholder)
-    }
-  }
+  const onFocus = () => label && !error && setText(label)
+
+  const onBlur = () => value === '' && !error && setText(placeholder)
 
   let inputProps = {
     id,
-    className: classNames(!!validation?.error ? variations.ERROR : variation, {dirty: value !== ''}),
+    className: classNames(!!error ? styles.error : styles[variation], {[styles.dirty]: value !== ''}),
     name,
     autoComplete,
     type,
+    onChange,
     onFocus,
     onBlur,
+    value: value ?? ''
   }
 
-  if(!!validation) {
-    inputProps.ref = validation?.register
-    inputProps.defaultValue = defaultValue ?? ''
-  } else {
-    inputProps.onChange = event => onChange(event.target.value)
-    inputProps.value = value ?? ''
-  }
-
-  useEffect(() => {
-    if(!!validation?.error) {
-      variation = variations.ERROR
-      switch(validation.error.type) {
-        case 'required':
-          setText(!!label ? `${label} is required` : `Required`)
-          break
-        default:
-          setText(validation.error.message)
-          break
-      }
-    } else {
-      setText(label ?? placeholder)
-    }
-  }, [validation])
+  // useEffect(() => {
+  //   if(!!validation?.error) {
+  //     // variation = variations.ERROR
+  //     switch(validation.error.type) {
+  //       case 'required':
+  //         setText(!!label ? `${label} is required` : `Required`)
+  //         break
+  //       default:
+  //         setText(validation.error.message)
+  //         break
+  //     }
+  //   } else {
+  //     setText(label ?? placeholder)
+  //   }
+  // }, [validation])
 
   return (
     <>
       <div className="relative w-full">
         <input {...inputProps} />
-        <label htmlFor={id} className={classNames('input-label-box', !!validation?.error ? variations.ERROR : variation)}>{text}</label>
+        <label htmlFor={id} className={classNames(styles['input-label-box'], !!error ? styles.error : styles.variation)}>{text}</label>
       </div>
     </>
   )
@@ -70,9 +57,10 @@ const Input = ({name, validation, variation, type, defaultValue, value, label, p
 
 Input.defaultProps = {
   name: '',
-  variation: variations.PRIMARY,
+  variation: variation.PRIMARY,
   type: 'text',
   value: '',
+  error: null,
   required: false,
   autoComplete: 'no',
   label: '',
@@ -81,17 +69,10 @@ Input.defaultProps = {
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  variation: PropTypes.oneOf(Object.values(variations)),
-  validation: PropTypes.shape({
-    register: PropTypes.func.isRequired,
-    error: PropTypes.shape({
-      message: PropTypes.string,
-      type: PropTypes.string,
-    }),
-  }),
-  defaultValue: PropTypes.string,
+  variation: PropTypes.oneOf(Object.values(variation)),
   value: PropTypes.string,
   required: PropTypes.bool,
+  error: PropTypes.string,
   autoComplete: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
