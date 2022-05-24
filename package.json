@@ -1,47 +1,48 @@
 {
-    "name": "test",
-    "private": true,
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint"
-    },
-    "dependencies": {
-        "@apollo/client": "^3.6.2",
-        "@types/bcryptjs": "^2.4.2",
-        "bcryptjs": "^2.4.3",
-        "classnames": "^2.3.1",
-        "dotenv": "^16.0.1",
-        "glob": "^8.0.3",
-        "graphql": "^16.5.0",
-        "luxon": "^2.4.0",
-        "next": "12.1.6",
-        "react": "^18.1.0",
-        "react-dom": "18.1.0",
-        "react-icons": "^4.3.1"
-    },
-    "devDependencies": {
-        "@faker-js/faker": "^6.3.1",
-        "@prisma/client": "^3.14.0",
-        "@types/glob": "^7.2.0",
-        "@types/node": "^17.0.33",
-        "@types/react": "18.0.9",
-        "autoprefixer": "^10.4.7",
-        "eslint": "8.15.0",
-        "eslint-config-next": "12.1.6",
-        "postcss": "^8.4.13",
-        "postcss-import": "^14.1.0",
-        "postcss-nesting": "^10.1.7",
-        "prisma": "^3.14.0",
-        "tailwindcss": "^3.0.24",
-        "ts-dotenv": "^0.8.3",
-        "ts-node": "^10.7.0",
-        "tsconfig-paths": "^4.0.0",
-        "tslib": "^2.4.0",
-        "typescript": "4.6.4"
-    },
-    "prisma": {
-        "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./prisma/seeds/index.ts"
-    }
+  "name": "test",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.2",
+    "@next-auth/prisma-adapter": "^1.0.3",
+    "@types/bcryptjs": "^2.4.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.1",
+    "glob": "^8.0.3",
+    "graphql": "^16.5.0",
+    "luxon": "^2.4.0",
+    "next": "12.1.6",
+    "next-auth": "^4.3.4",
+    "nodemailer": "^6.7.5",
+    "react": "^18.1.0",
+    "react-dom": "18.1.0",
+		"react-icons": "^4.3.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5",
+    "@prisma/client": "^3.14.0",
+    "@types/glob": "^7.2.0",
+    "@types/node": "^17.0.33",
+    "@types/react": "18.0.9",
+    "autoprefixer": "^10.4.7",
+    "eslint": "8.15.0",
+    "eslint-config-next": "12.1.6",
+    "postcss": "^8.4.12",
+    "postcss-import": "^14.1.0",
+    "prisma": "^3.14.0",
+    "tailwindcss": "^3.14.0",
+    "ts-dotenv": "^0.8.3",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^4.0.0",
+    "tslib": "^2.4.0",
+    "typescript": "4.6.4"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./prisma/seeds/index.ts"
+  }
 }

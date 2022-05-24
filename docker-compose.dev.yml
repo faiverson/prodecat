@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: ${TARGET_ENV?}
+      target: ${TARGET_ENV?:development}
       args:
-        NODE_ENV: ${NODE_ENV?}
+        NODE_ENV: ${NODE_ENV?:development}
     restart: always
     volumes:
       - ./:/app
