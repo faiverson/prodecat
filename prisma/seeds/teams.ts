@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 import {PrismaClient} from '@prisma/client'
-import {snakeCase} from '../../lib/utils/utility'
+import {snakeCase} from '@/lib/utils/utility'
 import {default as data} from './data/american-cup.json'
 
 const prisma = new PrismaClient()

@@ -1,22 +1,49 @@
 version: "3.8"
 services:
   nextjs:
-    container_name: "${COMPOSE_PROJECT_NAME?}-nextjs"
+    container_name: "${COMPOSE_PROJECT_NAME}-nextjs"
     build:
-      context: .
       dockerfile: ./Dockerfile
-      target: ${TARGET_ENV?}
+      target: ${TARGET_ENV}
       args:
-        NODE_ENV: ${NODE_ENV?}
+        NODE_ENV: ${NODE_ENV}
     restart: always
-
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - ${APP_PORT}:3000
+    depends_on:
+      - mariadb
     environment:
-      APP_ENV: ${APP_ENV?}
-      APP_URL: ${APP_URL?}
+      - DATABASE_URL=${DATABASE_URL}
 
-    networks:
-      - net-frontend
+  mariadb:
+    container_name: "${COMPOSE_PROJECT_NAME}-mariadb"
+    image: mariadb:latest
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "${DB_PORT}:3306/tcp"
+    restart: on-failure
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_USER}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
 
-networks:
-  net-frontend:
-    driver: bridge
+  mailhog:
+    container_name: "${COMPOSE_PROJECT_NAME}-mailhog"
+    image: mailhog/mailhog:latest
+    ports:
+      - 1045:1025 # smtp server
+      - 8045:8025 # web ui
+    environment:
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /tmp
+    volumes:
+      - maildir:/tmp
+volumes:
+  maildir:
+  db-data:
