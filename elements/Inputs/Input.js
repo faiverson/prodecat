@@ -12,7 +12,6 @@ const Input = ({variation, name, type, error, value, label, placeholder, autoCom
   const [text, setText] = useState(placeholder)
   const id = [name, 'fc-input'].join('-')
 
-
   const onFocus = () => label && !error && setText(label)
 
   const onBlur = () => value === '' && !error && setText(placeholder)
@@ -28,22 +27,6 @@ const Input = ({variation, name, type, error, value, label, placeholder, autoCom
     onBlur,
     value: value ?? ''
   }
-
-  // useEffect(() => {
-  //   if(!!validation?.error) {
-  //     // variation = variations.ERROR
-  //     switch(validation.error.type) {
-  //       case 'required':
-  //         setText(!!label ? `${label} is required` : `Required`)
-  //         break
-  //       default:
-  //         setText(validation.error.message)
-  //         break
-  //     }
-  //   } else {
-  //     setText(label ?? placeholder)
-  //   }
-  // }, [validation])
 
   return (
     <>

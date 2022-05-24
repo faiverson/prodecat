@@ -5,31 +5,23 @@ const InputNumber = ({name, type, value, required, label, placeholder, autoCompl
   const [text, setText] = useState(placeholder)
   const id = [name, 'fc-input-number'].join('-')
 
-  const onFocus = () => {
-    if(label) {
-      setText(label)
-    }
-  }
+  const onFocus = () => label && !error && setText(label)
 
-  const onBlur = () => {
-    if(value === '') {
-      setText(placeholder)
-    }
-  }
+  const onBlur = () => value === '' && !error && setText(placeholder)
 
   return (
     <>
       <div className="relative w-10">
         <input className="input-number"
-              type={type}
-              autoComplete={autoComplete}
-              id={id}
-              name={name}
-              value={value}
-              required={required}
-              onChange={ event => onChange(event.target.value) }
-              onFocus={onFocus}
-              onBlur={onBlur} />
+                type={type}
+                autoComplete={autoComplete}
+                id={id}
+                name={name}
+                value={value}
+                required={required}
+                onChange={ event => onChange(event.target.value) }
+                onFocus={onFocus}
+                onBlur={onBlur} />
         <label htmlFor={id} className="input-number-label-box">{text}</label>
       </div>
     </>
