@@ -1,47 +1,11 @@
-import React, { useState } from 'react'
-import { gql, useMutation, useApolloClient } from '@apollo/client'
-import { useRouter } from 'next/router'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from 'components/Layout'
-import { Input, Checkbox, Password } from 'elements/core'
 import styles from './css/login.module.css'
 import cn from 'classnames'
 
-const LogInMutation = gql`
-  mutation LogInMutation($username: String!, $password: String!) {
-    logIn(input: { username: $username, password: $password }) {
-      user {
-        id
-        username
-        email
-      }
-    }
-  }
-`
-
 const LogIn = () => {
-  // const client = useApolloClient()
-  // const [logIn] = useMutation(LogInMutation)
-  const router = useRouter()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-    try {
-      await client.resetStore()
-      const { data } = await logIn({
-        variables: { username, password },
-      })
-      if (data.logIn.user) {
-        await router.push('/')
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   return (
     <>
       <div className="flex flex-col w-2/4 mt-32">
@@ -50,38 +14,23 @@ const LogIn = () => {
         <h3 className="mt-4 text-2xl font-light leading-none text-center text-white">Your perfect betting digital platform</h3>
       </div>
       <div className="flex flex-col w-2/4 mt-32">
-        <form onSubmit={handleSubmit} className="w-full h-auto max-w-sm grid-flow-row grid-cols-2 mx-auto ">
-          <div className="row">
-            <Input name="username" label="Username" placeholder="janedoe@email.com" required value={username} onChange={txt => setUsername(txt)} />
-          </div>
-          <div className="row">
-            <Password name="password" label="Password" placeholder="Type your password" required value={password} onChange={txt => setPassword(txt)} />
-          </div>
-          <div className="justify-between pt-2 row">
-            <Checkbox name="remember" text="Remember me" checked={false} />
-            <Link href="block forget-password">
-              <a className="text-sm font-light square-effect-white">Forget Password?</a>
+        <div className="w-full h-auto max-w-sm grid-flow-row grid-cols-2 mx-auto text-right">
+          <h3>Login with</h3>
+          <div className="flex flex-col items-end text-4xl leading-snug">
+            <Link href="#">
+              <a className="mt-4 square-effect-orange"><i className="pr-2 fa-brands fa-facebook-square" />Facebook</a>
+            </Link>
+            <Link href="#">
+              <a className="mt-4 square-effect-orange"><i className="pr-2 fa-brands fa-instagram" />Instagram</a>
+            </Link>
+            <Link href="#">
+              <a className="mt-4 square-effect-orange"><i className="pr-2 fa-brands fa-google" />Google</a>
+            </Link>
+            <Link href="#">
+              <a className="mt-4 square-effect-orange"><i className="pr-2 fa-brands fa-twitter-square" />Twitter</a>
             </Link>
           </div>
-          <div className="pt-8 row">
-            <Link href="signup">
-              <a className="w-full btn-secondary">Sign up</a>
-            </Link>
-            <button type="submit" className="w-full ml-2 btn-primary">Log In</button>
-          </div>
-          <div className="flex justify-between pt-8 row">
-            <span>or login with</span>
-            <Link href="signup">
-              <a className="square-effect-orange">Facebook</a>
-            </Link>
-            <Link href="signup">
-              <a className="square-effect-orange">Instagram</a>
-            </Link>
-            <Link href="signup">
-              <a className="square-effect-orange">Gmail</a>
-            </Link>
-          </div>
-        </form>
+        </div>
       </div>
     </>
   )

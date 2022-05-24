@@ -60,13 +60,10 @@ input.input-number:valid ~ label.input-number-label-box {
   transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
 }
 
-/* .button.success .icon {
-  @apply flex items-center;
-} */
-
 .btn-save .icon {
   @apply inline-block align-middle;
 }
+
 .btn-save svg {
   @apply inline-block mr-2 text-xl align-middle;
 }
@@ -74,13 +71,3 @@ input.input-number:valid ~ label.input-number-label-box {
 .btn-save span {
   @apply align-middle;
 }
-
-/* .button.success {
-  background-color: #27ae60;
-}
-.button.success .icon .save {
-  display: none;
-}
-.button.success .icon .confirm {
-  display: inline-block;
-} */

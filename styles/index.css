@@ -1,18 +1,6 @@
-:root {
-  --brand-blue: #07162a;
-  --brand-marine: #15325b;
-  --brand-blue-grey: #3e526d;
-  --brand-orange: #f5931c;
-  --brand-gray: #727b86;
-  --brand-gray-dark: #2c394a;
-  --brand-gray-light: #a8aeb5;
-  --brand-spotlight-blue: #1c86f4;
-  --xl: 1280px;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @import './font-awesome/all.css';
 @import './font-awesome/v4-shims.css';
 @import './base.css';
@@ -54,7 +42,7 @@ a.square-effect-orange::after {
   left: 12px;
   bottom: -6px;
   width: calc(100% - 8px);
-  height: calc(100% - 8px);
+  height: calc(100% - 20px);
   transition: 0.35s cubic-bezier(0.25, 0.1, 0, 2.05);
 }
 
