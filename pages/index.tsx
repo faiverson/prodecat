@@ -1,48 +1,36 @@
 import type { NextPage } from 'next'
 import Layout from '@/components/Layout'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { MatchTable, Loading } from '@/elements/core'
 import Link from 'next/link'
+import prisma from 'lib/prisma'
 import { useQuery } from 'react-query'
 
 const HomePage: NextPage = () => {
-
-  const { data: session } = useSession()
-
-  const { isLoading, error, data } = useQuery('repoData', () =>
-     fetch('http://localhost:3000/api/teams').then(res =>
-       res.json()
-     )
-   )
-
-   if (isLoading) {
-     return <p>Loading</p>
-   }
-   console.log(data)
-
-  if (session)
-    return (
-      <div className='flex flex-col justify-center align-middle'>
-        <p>Logged in successfully</p>
-        <button onClick={() => signOut()}>Sign Out</button>
-      </div>
-    )
-
-  return (
-    <div className="flex flex-col justify-center align-middle main-background">
-      <h1 className="font-bold leading-none basis-full text-huge text-brand-orange">DASHBOARD!</h1>
-        <Link href="/login">
-          <a className='m-8 square-effect-orange'>Login</a>
-        </Link>
-    </div>
+  const { isLoading, error, data } = useQuery('getNextMatches', () =>
+    fetch('/api/next-matches').then(res => res.json())
   )
-}
 
-const Index = () => {
+  const tournaments = !!data && data.tournaments
+
   return (
     <Layout>
-      <HomePage />
+      <div className="flex max-w-screen-lg pt-4 mx-auto">
+        {isLoading
+          ? <Loading fullPage />
+          : tournaments.map((item, i) => {
+            const { name: title, matches, current_round: round } = item
+            return (
+              <div key={i} className="w-full max-w-screen-lg ">
+                <h2 className="mt-6 text-xl font-semibold mb-7 text-brand-orange">{`${title} - Round ${round}`}</h2>
+                <MatchTable matches={matches} />
+              </div>
+            )
+          })
+        }
+      </div>
     </Layout>
   )
 }
 
-export default Index
+
+export default HomePage

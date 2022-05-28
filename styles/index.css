@@ -8,7 +8,7 @@
 
 .main-background {
   background-image:url('/images/bg-center.svg'), url('/images/background-bottom-right.svg');
-  background-position: top left, calc((100vw - var(--xl)) / 2) calc(101px + 3em), bottom right;
+  background-position: top left, bottom right;
   background-repeat: no-repeat;
 }
 
@@ -20,6 +20,9 @@
   @apply flex items-center mb-4;
 }
 
+.header-height {
+  height: calc(108px + 1rem);
+}
 /*********************************************************************************************
                                     LINKS
 **********************************************************************************************/

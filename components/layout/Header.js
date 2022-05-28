@@ -13,13 +13,13 @@ export default function Header() {
   ))
 
   return (
-    <header className="grid grid-cols-9 border-b border-brand-blue-grey">
-      <div className="col-span-2 px-4 py-2">
+    <header className="flex justify-between h-4 border-b border-brand-blue-grey header-height">
+      <div className="absolute px-4 py-2 top-1 left-2">
         <Link href="/">
           <a><Image src="/images/forecats-up.png" alt="Forecats" width={183} height={101} /></a>
         </Link>
       </div>
-      <div className="flex col-span-5 xl:container">
+      <div className="container flex max-w-screen-lg mx-auto">
         <nav className="grid w-auto gap-4 grid-min-content">
           <Navbar items={items}></Navbar>
         </nav>

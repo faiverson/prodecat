@@ -1,20 +1,19 @@
 import cn from 'classnames'
 import Head from 'next/head'
 import Header from './layout/Header'
-import { Loading } from 'elements/core'
-import { useUser } from 'lib/hooks/user'
+import Router from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 type MainPageProps = {
   children: React.ReactNode;
 }
 
 const MainPage = ({ children }: MainPageProps) => {
-  // @TODO uncomment this part
-  // const user = useUser({ redirectTo: '/login' })
+  const { data: session } = useSession()
 
-  // if (!user) {
-  //   return <Loading fullPage />
-  // }
+  if (!session) {
+    // Router.push('/login')
+  }
 
   return (
     <>
