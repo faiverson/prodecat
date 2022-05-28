@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Header from './layout/Header'
 import { Loading } from 'elements/core'
 import { useUser } from 'lib/hooks/user'
-import PropTypes from 'prop-types'
 
 type MainPageProps = {
   children: React.ReactNode;
@@ -27,13 +26,6 @@ const MainPage = ({ children }: MainPageProps) => {
       </div>
     </>
   )
-}
-
-MainPage.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]).isRequired
 }
 
 type LayoutProps = {
@@ -68,15 +60,6 @@ const Layout = ({ children, special, className }: LayoutProps) => {
 Layout.defaultProps = {
   className: '',
   special: false,
-}
-
-Layout.propTypes = {
-  special: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]).isRequired
 }
 
 export default Layout

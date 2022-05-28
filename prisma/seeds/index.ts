@@ -7,7 +7,7 @@ import matches from './matches'
 const prisma = new PrismaClient()
 
 async function main() {
-  await users()
+  //await users()
   await teams()
   await matches()
 }
