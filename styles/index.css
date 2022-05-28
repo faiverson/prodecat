@@ -27,14 +27,16 @@
   @apply relative overflow-hidden no-underline;
 }
 
-a.square-effect-orange {
+button.square-effect-orange ,a.square-effect-orange {
   @apply square-effect text-brand-orange ;
 }
 
-a.square-effect-white {
+button.square-effect-white, a.square-effect-white {
   @apply square-effect text-white;
 }
 
+button.square-effect-white::after,
+button.square-effect-orange::after,
 a.square-effect-white::after,
 a.square-effect-orange::after {
   content: "";
@@ -46,6 +48,8 @@ a.square-effect-orange::after {
   transition: 0.35s cubic-bezier(0.25, 0.1, 0, 2.05);
 }
 
+button.square-effect-orange:hover:after,
+button.square-effect-white:hover:after,
 a.square-effect-orange:hover:after,
 a.square-effect-white:hover:after {
   left: 0;
