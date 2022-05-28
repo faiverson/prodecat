@@ -1,12 +1,24 @@
 import type { NextPage } from 'next'
 import Layout from '@/components/Layout'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import prisma from '@/lib/prisma'
+import Link from 'next/link'
+import { useQuery } from 'react-query'
 
-const HomePage: NextPage = (props) => {
+const HomePage: NextPage = () => {
 
   const { data: session } = useSession()
-  console.log(props)
+
+  const { isLoading, error, data } = useQuery('repoData', () =>
+     fetch('http://localhost:3000/api/teams').then(res =>
+       res.json()
+     )
+   )
+
+   if (isLoading) {
+     return <p>Loading</p>
+   }
+   console.log(data)
+
   if (session)
     return (
       <div className='flex flex-col justify-center align-middle'>
@@ -18,12 +30,14 @@ const HomePage: NextPage = (props) => {
   return (
     <div className="flex flex-col justify-center align-middle main-background">
       <h1 className="font-bold leading-none basis-full text-huge text-brand-orange">DASHBOARD!</h1>
+        <Link href="/login">
+          <a className='m-8 square-effect-orange'>Login</a>
+        </Link>
     </div>
   )
 }
 
-const Index = (props) => {
-  console.log(props)
+const Index = () => {
   return (
     <Layout>
       <HomePage />
@@ -31,33 +45,4 @@ const Index = (props) => {
   )
 }
 
-export async function getServerSideProps() {
-  // Get external data from the file system, API, DB, etc.
-  const data = await prisma.match.findMany({
-    where: {
-      AND: [
-        {
-          state: 'created',
-          round_number: '1'
-        },
-      ]
-    },
-    // TODO: make the includes depending on the request
-    include: {
-      local: true,
-      away: true,
-    },
-  })
-
-  // The value of the `props` key will be
-  //  passed to the `Home` component
-  data.map(item => console.log(item))
-  return {
-    props: {
-      matches: data
-    }
-  }
-}
-
 export default Index
-
